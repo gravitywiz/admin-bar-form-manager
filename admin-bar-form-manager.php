@@ -4,7 +4,7 @@
  * Plugin URI: http://gravitywiz.com
  * Description: Adds an admin bar menu item for Gravity Forms, allowing you to easily access your forms.
  * Author: Gravity Wiz
- * Version: 0.2
+ * Version: 0.3
  * Author URI: http://gravitywiz.com
  */
 class GW_Admin_Bar_Form_Manager {
@@ -29,10 +29,11 @@ class GW_Admin_Bar_Form_Manager {
 		add_action( 'admin_head', array( $this, 'enhance_admin_bar_scripts_styles' ), 99 );
 		add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ) );
 
-		require_once( 'includes/admin-bar-form-manager-import-form.php' );
-		require_once( 'includes/admin-bar-form-manager-export-form.php' );
-		require_once( 'includes/admin-bar-form-manager-new-form.php' );
+		// These will be included in reverse order in the menu.
 		require_once( 'includes/admin-bar-form-manager-debug.php' );
+		require_once( 'includes/admin-bar-form-manager-export-form.php' );
+		require_once( 'includes/admin-bar-form-manager-import-form.php' );
+		require_once( 'includes/admin-bar-form-manager-new-form.php' );
 
 	}
 
@@ -70,7 +71,7 @@ class GW_Admin_Bar_Form_Manager {
 
 	public function get_menu_items( $defaults ) {
 
-		$forms = GFFormsModel::get_forms();
+		$forms = GFFormsModel::get_forms( null, 'id', 'DESC' );
 		$items = array();
 
 		foreach( $forms as $form ) {
