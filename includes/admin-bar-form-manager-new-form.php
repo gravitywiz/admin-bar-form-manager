@@ -209,6 +209,34 @@ class GW_ABFM_New_Form {
 					return '';
 				}
 
+				// Overwrite default GF choice inserstion so we can add our names.
+				window.InsertFieldChoice = function( index ) {
+					field = GetSelectedField();
+
+					var price = field["enablePrice"] ? "0.00" : "";
+					var new_choice = new Choice( getFullOrdinalChoice( index ), getFullOrdinalChoice( index ), price);
+					if(window["gform_new_choice_" + field.type])
+						new_choice = window["gform_new_choice_" + field.type](field, new_choice);
+
+					if( typeof field.choices !== 'object' ) {
+						field.choices = [];
+					}
+
+					field.choices.splice(index, 0, new_choice);
+
+					LoadFieldChoices(field);
+					UpdateFieldChoices(GetInputType(field));
+				}
+
+				function getFullOrdinalChoice( index ) {
+					var ordinals = [ 'First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth', 'Thirteen', 'Fourteen', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenh', 'Nineteenth', 'Twentieth' ];
+					var ordinal = rgar( ordinals, index, '' );
+					if ( ordinal ) {
+						ordinal += ' Choice';
+					}
+					return ordinal;
+				}
+
 			} )();
 
 		</script>
