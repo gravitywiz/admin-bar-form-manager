@@ -33,6 +33,7 @@ class GW_Admin_Bar_Form_Manager {
 		require_once( 'includes/admin-bar-form-manager-debug.php' );
 		require_once( 'includes/admin-bar-form-manager-export-form.php' );
 		require_once( 'includes/admin-bar-form-manager-import-form.php' );
+		require_once( 'includes/admin-bar-form-manager-new-nested-form.php' );
 		require_once( 'includes/admin-bar-form-manager-new-form.php' );
 
 	}
