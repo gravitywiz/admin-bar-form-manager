@@ -31,6 +31,7 @@ class GW_ABFM_Import_Form {
 			'href' => add_query_arg( array(
 				'page' => 'gf_export',
 				'view' => 'import_form',
+				'subview' => 'import_form',
 			), admin_url( 'admin.php' ) ),
 			'meta' => array( 'class' => '' )
 		), $defaults );
