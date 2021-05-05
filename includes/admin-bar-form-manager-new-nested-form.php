@@ -134,11 +134,15 @@ class GW_ABFM_New_Nested_Form {
 		if ( absint( $result ) > 0 ) {
 
 			$form = $result['meta'];
-
+			$formTitle = rgget( 'formTitle' );
 			// Set form title to form title base + form ID.
 			$base              = $child_form_id ? 'Parent' : 'Child';
 			$title_form_id     = $child_form_id ? $child_form_id : $form['id'];
-			$form['title']     = sprintf( '%s %s', $base, $title_form_id );
+			if ( ! empty( $formTitle ) ) {
+				$form['title'] = sprintf( '%s %s', $formTitle, $base );
+			} else {
+				$form['title'] = sprintf( '%s %s', $base, $title_form_id );
+			}
 			$form['is_active'] = true;
 
 			GFAPI::update_form( $form );

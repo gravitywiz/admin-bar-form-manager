@@ -90,9 +90,9 @@ class GW_ABFM_New_Form {
 		if( absint( $result ) > 0 ) {
 
 			$form = $result['meta'];
-
+			$formTitle = rgget( 'formTitle' );
 			// Set form title to form title base + form ID.
-			$form['title'] = sprintf( '%s %s', $this->form_title_base, $form['id'] );
+			$form['title'] = empty( $formTitle ) ? sprintf( '%s %s', $this->form_title_base, $form['id'] ) : $formTitle;
 			$form['is_active'] = true;
 
 			GFAPI::update_form( $form );
