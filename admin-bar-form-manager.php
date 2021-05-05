@@ -218,13 +218,23 @@ class GW_Admin_Bar_Form_Manager {
 
 					subMenu.html( '' );
 
-					listItems.filter( function() {
+					var $filteredList = listItems.filter( function() {
 
 						var search = searchInput.val(),
 							regex  = new RegExp( search, 'i' );
 
+						// Always show "Add New" commands if search is numeric (and modify links accordingly)
+						var $this = $( this );
+						if ( $this.text().indexOf( 'cmd: Add' ) === 0 ) {
+							if ( search && search.match(/^[0-9]*$/) ) {
+								$this.find('span').after( "<span> ({0})</span>".format( search ) );
+								$this.find('a').get(0).href += "&formTitle={0}".format( encodeURIComponent( search ) );
+								return true;
+							}
+						}
 						return regex.test( $( this ).text() );
-					} ).appendTo( subMenu );
+					} );
+					$filteredList.appendTo( subMenu );
 
 				}
 
