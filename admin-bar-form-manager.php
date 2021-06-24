@@ -227,8 +227,8 @@ class GW_Admin_Bar_Form_Manager {
 						var $this = $( this );
 						if ( $this.text().indexOf( 'cmd: Add' ) === 0 ) {
 							if ( search && search.match(/^[0-9]*$/) ) {
-								$this.find('span').after( "<span> ({0})</span>".format( search ) );
-								$this.find('a').get(0).href += "&formTitle={0}".format( encodeURIComponent( search ) );
+								$this.find('span').after('<span> (' + search + ')</span>');
+								$this.find('a').get(0).href += '&formTitle=' + encodeURIComponent( search );
 								return true;
 							}
 						}
