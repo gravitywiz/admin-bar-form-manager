@@ -173,6 +173,9 @@ class GW_ABFM_New_Form {
 				var gfCreateField = window.CreateField;
 				window.CreateField = function( nextId, type, index ) {
 					var field = gfCreateField( nextId, type, index );
+					if ( type == 'submit' ) {
+						return field;
+					}
 					if( field.label === '<?php _e( 'Untitled', 'gravityforms' ); ?>' ) {
 						field.label = fieldTypeLabels[ field.type ];
 					}
