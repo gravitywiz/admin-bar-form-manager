@@ -15,8 +15,9 @@ class GW_ABFM_New_Form {
 	private static $instance = null;
 
 	public static function get_instance() {
-		if( null == self::$instance )
+		if ( null == self::$instance ) {
 			self::$instance = new self;
+		}
 		return self::$instance;
 	}
 
@@ -33,13 +34,13 @@ class GW_ABFM_New_Form {
 	public function add_menu_item( $items, $defaults ) {
 
 		$item = wp_parse_args( array(
-			'id' => sanitize_title_with_dashes( 'add-new-form' ),
+			'id'    => sanitize_title_with_dashes( 'add-new-form' ),
 			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'Add New Form' ) ),
-			'href' => add_query_arg( array(
+			'href'  => add_query_arg( array(
 				'page'     => 'gf_new_form',
-				'auto_add' => true
+				'auto_add' => true,
 			), admin_url( 'admin.php' ) ),
-			'meta' => array( 'class' => '' )
+			'meta'  => array( 'class' => '' ),
 		), $defaults );
 
 		array_unshift( $items, $item );
@@ -49,7 +50,7 @@ class GW_ABFM_New_Form {
 
 	public function maybe_add_new_form() {
 
-		if( ! rgget( 'auto_add' ) ) {
+		if ( ! rgget( 'auto_add' ) ) {
 			return;
 		}
 
@@ -57,7 +58,7 @@ class GW_ABFM_New_Form {
 
 		wp_redirect( add_query_arg( array(
 			'page' => 'gf_edit_forms',
-			'id'   => $form['id']
+			'id'   => $form['id'],
 		), admin_url( 'admin.php' ) ) );
 
 		exit;
@@ -70,14 +71,14 @@ class GW_ABFM_New_Form {
 		$placeholder_title = uniqid();
 
 		$form = array(
-			'title'          => $placeholder_title,
-			'description'    => '',
-			'labelPlacement' => 'top_label',
-			'fields'         => array(),
-			'button'         => array(
-				'type'       => 'text',
-				'text'       => esc_html__( 'Submit', 'gravityforms' ),
-				'imageUrl'   => ''
+			'title'                => $placeholder_title,
+			'description'          => '',
+			'labelPlacement'       => 'top_label',
+			'fields'               => array(),
+			'button'               => array(
+				'type'     => 'text',
+				'text'     => esc_html__( 'Submit', 'gravityforms' ),
+				'imageUrl' => '',
 			),
 			'descriptionPlacement' => 'below',
 		);
@@ -87,12 +88,12 @@ class GW_ABFM_New_Form {
 		$result = GFFormDetail::save_form_info( 0, json_encode( $form ) );
 		$form   = false;
 
-		if( absint( $result ) > 0 ) {
+		if ( absint( $result ) > 0 ) {
 
-			$form = $result['meta'];
+			$form      = $result['meta'];
 			$formTitle = rgget( 'formTitle' );
 			// Set form title to form title base + form ID.
-			$form['title'] = empty( $formTitle ) ? sprintf( '%s %s', $this->form_title_base, $form['id'] ) : $formTitle;
+			$form['title']     = empty( $formTitle ) ? sprintf( '%s %s', $this->form_title_base, $form['id'] ) : $formTitle;
 			$form['is_active'] = true;
 
 			GFAPI::update_form( $form );
@@ -152,13 +153,13 @@ class GW_ABFM_New_Form {
 
 	public function output_default_field_name_script() {
 
-		if( GFForms::get_page() != 'form_editor' ) {
+		if ( GFForms::get_page() != 'form_editor' ) {
 			return;
 		}
 
-		$field_types = GF_Fields::get_all();
+		$field_types       = GF_Fields::get_all();
 		$field_type_labels = array();
-		foreach( $field_types as $field_type ) {
+		foreach ( $field_types as $field_type ) {
 			$field_type_labels[ $field_type->type ] = ucwords( $field_type->get_form_editor_field_title() );
 		}
 
@@ -173,6 +174,9 @@ class GW_ABFM_New_Form {
 				var gfCreateField = window.CreateField;
 				window.CreateField = function( nextId, type, index ) {
 					var field = gfCreateField( nextId, type, index );
+					if ( type === 'submit' ) {
+						return field;
+					}
 					if( field.label === '<?php _e( 'Untitled', 'gravityforms' ); ?>' ) {
 						field.label = fieldTypeLabels[ field.type ];
 					}
