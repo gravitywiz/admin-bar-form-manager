@@ -12,3 +12,4 @@ https://user-images.githubusercontent.com/550549/169353113-e139e75d-5cdd-4d2b-84
 4. Export the current form.
 5. Creates distinct names for newly added fields (Single Line Text A, Drop Down B, etc).
 6. Creates distinct names for new choices (Fourth Choice, Fifth Choice, etc).
+7. Activate with keyboard shortcut: `SHIFT + F + F`.
