@@ -30,7 +30,6 @@ class GW_Admin_Bar_Form_Manager {
 		add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ) );
 
 		// These will be included in reverse order in the menu.
-		require_once( 'includes/admin-bar-form-manager-debug.php' );
 		require_once( 'includes/admin-bar-form-manager-export-form.php' );
 		require_once( 'includes/admin-bar-form-manager-import-form.php' );
 		require_once( 'includes/admin-bar-form-manager-new-nested-form.php' );
