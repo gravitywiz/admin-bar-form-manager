@@ -186,18 +186,14 @@ class GW_Admin_Bar_Form_Manager {
 
 				} ).focus( function() {
 
-					subMenuWrap.show();
+					menu.addClass( 'hover' );
 
 				} ).blur( function() {
-
-					subMenuWrap.hide();
 					rootText.show();
 					rootItem.removeClass( 'search-active' );
-
-					searchInput.val( '' ).hide();
-					filterList();
-					selectedIndex = -1;
-
+					searchInput
+						.val( '' )
+						.hide();
 				} );
 
 				function navigateList( move ) {
@@ -233,6 +229,7 @@ class GW_Admin_Bar_Form_Manager {
 						}
 						return regex.test( $( this ).text() );
 					} );
+
 					$filteredList.appendTo( subMenu );
 
 				}
