@@ -160,7 +160,10 @@ class GW_ABFM_New_Form {
 		$field_types       = GF_Fields::get_all();
 		$field_type_labels = array();
 		foreach ( $field_types as $field_type ) {
-			$field_type_labels[ $field_type->type ] = ucwords( $field_type->get_form_editor_field_title() );
+			$field_title = $field_type->get_form_editor_field_title();
+			if ( $field_title ) {
+				$field_type_labels[ $field_type->type ] = ucwords( $field_title );
+			}
 		}
 
 		?>
