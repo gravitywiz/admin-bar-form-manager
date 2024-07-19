@@ -27,7 +27,7 @@ class GW_Admin_Bar_Form_Manager {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 		add_action( 'admin_head', array( $this, 'enhance_admin_bar_scripts_styles' ), 99 );
-		add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ) );
+		add_action( 'admin_bar_menu', array( $this, 'enhance_admin_bar' ), 6 );
 
 		// These will be included in reverse order in the menu.
 		require_once( 'includes/admin-bar-form-manager-export-form.php' );
