@@ -37,7 +37,7 @@ class GW_ABFM_New_Nested_Form {
 
 		$item = wp_parse_args( array(
 			'id'    => sanitize_title_with_dashes( 'add-new-nested-form' ),
-			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'Add New Nested Form' ) ),
+			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'New Nested Form' ) ),
 			'href'  => add_query_arg( array(
 				'page'          => 'gf_new_form',
 				'gpnf_auto_add' => true,

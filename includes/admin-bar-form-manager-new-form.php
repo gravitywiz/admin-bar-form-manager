@@ -10,7 +10,6 @@
 class GW_ABFM_New_Form {
 
 	public $form_title_base    = 'Form';
-	public $use_roman_numerals = false;
 
 	private static $instance = null;
 
@@ -35,7 +34,7 @@ class GW_ABFM_New_Form {
 
 		$item = wp_parse_args( array(
 			'id'    => sanitize_title_with_dashes( 'add-new-form' ),
-			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'Add New Form' ) ),
+			'title' => sprintf( '<span style="opacity:0.3;">cmd:</span> %s', __( 'New Form' ) ),
 			'href'  => add_query_arg( array(
 				'page'     => 'gf_new_form',
 				'auto_add' => true,
@@ -101,54 +100,6 @@ class GW_ABFM_New_Form {
 		}
 
 		return $form;
-	}
-
-	public function convert_roman_to_numeric( $roman ) {
-
-		$number = 0;
-		$romans = $this->get_roman_numerals();
-
-		foreach ( $romans as $key => $value ) {
-			while ( strpos( $roman, $key ) === 0 ) {
-				$number += $value;
-				$roman   = substr( $roman, strlen( $key ) );
-			}
-		}
-
-		return $number;
-	}
-
-	public function convert_numeric_to_roman( $number ) {
-
-		$n      = intval( $number );
-		$result = '';
-		$romans = $this->get_roman_numerals();
-
-		foreach ( $romans as $roman => $number ) {
-			$matches = intval( $n / $number );
-			$result .= str_repeat( $roman, $matches );
-			$n       = $n % $number;
-		}
-
-		return $result;
-	}
-
-	public function get_roman_numerals() {
-		return array(
-			'M'  => 1000,
-			'CM' => 900,
-			'D'  => 500,
-			'CD' => 400,
-			'C'  => 100,
-			'XC' => 90,
-			'L'  => 50,
-			'XL' => 40,
-			'X'  => 10,
-			'IX' => 9,
-			'V'  => 5,
-			'IV' => 4,
-			'I'  => 1,
-		);
 	}
 
 	public function output_default_field_name_script() {
